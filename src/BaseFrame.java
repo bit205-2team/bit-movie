@@ -1,4 +1,5 @@
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,22 +16,22 @@ import javax.swing.JSplitPane;
 public class BaseFrame extends JFrame implements ActionListener{
 	JSplitPane baseSp;
 	JSplitPane menuSp;
-	static JPanel viewPane = new JPanel();
+	JPanel viewPane = new JPanel();
 	
-		
+	SignUp sss = new SignUp();
 		
 		Font homeFnt = new Font("±¼¸²",Font.BOLD, 100);
 		Font menuFnt = new Font("±¼¸²",Font.BOLD, 40);
-	JButton testbtn = new JButton("kkk");
 		JPanel testPanel = new JPanel();
 	public BaseFrame() {
 		super("BIT CINEMA");
 		baseTop();
-		JLabel lbl = new JLabel("testsadjfklasjfklasjdfj;alsdjfkl");
-		
-		testPanel.add(lbl);
-		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
-		viewPane.add(testbtn);
+		viewPane.add(BorderLayout.CENTER,sss);
+
+		System.out.println(sss.getClass());
+		viewPane.add(BorderLayout.CENTER, new SignUp());
+//		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
+		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, sss);
 		baseSp.setDividerSize(0);
 		baseSp.setDividerLocation(200);
 		
@@ -40,7 +41,6 @@ public class BaseFrame extends JFrame implements ActionListener{
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		testbtn.addActionListener(this);
 	}
 	
 	public void baseTop(){
@@ -104,17 +104,14 @@ public class BaseFrame extends JFrame implements ActionListener{
 		
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton)e.getSource();
-		String test = btn.getText();
-		
-		if(test.equals("kkk")) {
-			viewPane.add(testPanel);
-		}
-	}
 	public static void main(String[] args) {
 		new BaseFrame();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

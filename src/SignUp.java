@@ -1,32 +1,19 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class SignUp extends JFrame implements ActionListener{
+public class SignUp extends JPanel implements ActionListener{
 	
 	Font fn = new Font("굴림",Font.BOLD,20);
 	
-	
 	public SignUp() {
-	
-	}
-	
-	
-	public JPanel pan1() {
-		
-		JPanel pan = new JPanel();
-		
 		JButton btnid = new JButton("중복확인");
 		JButton sginupbtn = new JButton("회원가입");
 		
@@ -45,8 +32,8 @@ public class SignUp extends JFrame implements ActionListener{
 		JTextField textfieldtel = new JTextField();
 		JTextField textfieldemail = new JTextField();
 		
-		pan.setLayout(null);
-		pan.setBackground(Color.white);
+		setLayout(null);
+		setBackground(Color.white);
 		
 		//회원가입 150,40 가 세
 		sginuplb.setFont(new Font("굴림",Font.BOLD,30));
@@ -54,7 +41,8 @@ public class SignUp extends JFrame implements ActionListener{
 		
 		//ID
 		idlb.setFont(new Font("굴림",Font.BOLD,30));
-		idlb.setBounds(370,2,250,236);
+		idlb.setBounds(320,2,100,236);
+		idlb.setHorizontalAlignment(JLabel.RIGHT);;
 		textfieldid.setBounds(430,105,270,30);
 		
 		//중복확인
@@ -89,31 +77,30 @@ public class SignUp extends JFrame implements ActionListener{
 		//회원가입 버튼
 		sginupbtn.setBounds(465,400,200,30);
 		
-		pan.add(sginuplb);
-		pan.add(idlb);
-		pan.add(textfieldid);
-		pan.add(btnid);
+		add(sginuplb);
+		add(idlb);
+		add(textfieldid);
+		add(btnid);
+		add(pawlb);
+		add(textfieldpaw);
 		
-		pan.add(pawlb);
-		pan.add(textfieldpaw);
+		add(textfieldname);
+		add(namelb);
 		
-		pan.add(textfieldname);
-		pan.add(namelb);
+		add(textfieldbirth);
+		add(birthlb);
 		
-		pan.add(textfieldbirth);
-		pan.add(birthlb);
+		add(textfieldtel);
+		add(telb);
 		
-		pan.add(textfieldtel);
-		pan.add(telb);
+		add(textfieldemail);
+		add(emailb);
 		
-		pan.add(textfieldemail);
-		pan.add(emailb);
-		
-		pan.add(sginupbtn);
-		
-		return pan;
+		add(sginupbtn);
 		
 	}
+	
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -121,16 +108,9 @@ public class SignUp extends JFrame implements ActionListener{
 		JButton button = (JButton)e.getSource();
 		String btn = button.getText();
 		if(btn.equals("중복확인")) {
-			SignUp signin = new SignUp();
-			signin.pan1();
 			System.out.println("실행");
 		}
 		
 	}
 	
-	
-	public static void main(String[] args) {
-
-	}
-
 }
