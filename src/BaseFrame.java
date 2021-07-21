@@ -32,11 +32,11 @@ public class BaseFrame extends JFrame implements ActionListener{
 		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
 		viewPane.add(testbtn);
 		baseSp.setDividerSize(0);
-		baseSp.setDividerLocation(400);
+		baseSp.setDividerLocation(200);
 		
 		
 		add(baseSp);
-		setSize(1500,1000);
+		setSize(1200,800);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
