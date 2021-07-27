@@ -24,7 +24,7 @@ public class SignUp extends JPanel implements ActionListener{
 		JLabel birthlb = new JLabel("birth");
 		JLabel telb = new JLabel("tel");
 		JLabel emailb = new JLabel("email");
-		
+		 
 		JTextField textfieldid = new JTextField();
 		JPasswordField textfieldpaw = new JPasswordField(12);
 		JTextField textfieldname = new JTextField();

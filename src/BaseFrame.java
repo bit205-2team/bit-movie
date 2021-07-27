@@ -1,6 +1,5 @@
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,19 +18,21 @@ public class BaseFrame extends JFrame implements ActionListener{
 	JPanel viewPane = new JPanel();
 	
 	SignUp sss = new SignUp();
+	QuickReservation qq = new QuickReservation();
 		
 		Font homeFnt = new Font("±¼¸²",Font.BOLD, 100);
 		Font menuFnt = new Font("±¼¸²",Font.BOLD, 40);
 		JPanel testPanel = new JPanel();
+		
 	public BaseFrame() {
 		super("BIT CINEMA");
 		baseTop();
-		viewPane.add(BorderLayout.CENTER,sss);
-
-		System.out.println(sss.getClass());
+//		viewPane.add(BorderLayout.CENTER,sss);
+//		System.out.println(sss.getClass());
+		
 		viewPane.add(BorderLayout.CENTER, new SignUp());
 //		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
-		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, sss);
+		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, qq);
 		baseSp.setDividerSize(0);
 		baseSp.setDividerLocation(200);
 		
@@ -102,10 +103,6 @@ public class BaseFrame extends JFrame implements ActionListener{
 	}
 	public void mainPanel() {
 		
-	}
-	
-	public static void main(String[] args) {
-		new BaseFrame();
 	}
 
 	@Override
