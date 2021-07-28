@@ -20,9 +20,11 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class MyPage extends JPanel implements ActionListener{
+
 	
 	//유저 정볼 판넬 그룹
-	JPanel topPane = new JPanel();
+		
+		JPanel topPane = new JPanel();
 		JPanel infoBoxPane = new JPanel(new BorderLayout());
 			JPanel namePane = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 10));
 			String name = "홍길동";//db정보 연동 필요
