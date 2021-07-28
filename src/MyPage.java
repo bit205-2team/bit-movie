@@ -16,9 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class MyPage extends JFrame implements ActionListener{
+public class MyPage extends JPanel implements ActionListener{
 	
 	//유저 정볼 판넬 그룹
 	JPanel topPane = new JPanel();
@@ -39,20 +40,17 @@ public class MyPage extends JFrame implements ActionListener{
 		String[] menuText = {"나의 예매내역","예매내역 조회/취소","내가 본 영화","","포인트/관람권","포인트 적립/사용내역","관람권등록","","등급안내","","회원탈퇴"};
 		JButton menuBtn[] = new JButton[12];
 		
-	//카드레이아웃
+	//카드레이아웃 /////////////////////////////////////////////아직못함
 	JPanel cardPane = new JPanel();
+	//////////박스레이아웃
+	
+	
 	JScrollPane sp = new JScrollPane(cardPane);
 	CardLayout card = new CardLayout();
 	JTextArea ta = new JTextArea();
 	
-	/*
-	ImageIcon image2 = new ImageIcon(".\\src\\img\\blackwidow.jfif");
-    Image img = image2.getImage();
-    Image im2 = img.getScaledInstance(650, 850, Image.SCALE_SMOOTH);
-    ImageIcon img2 = new ImageIcon(im2);
-    */
 	
-	//내가 본 영화
+	//내가 본 영화//////////////////////////////////////아직못함
 	JPanel moviesIsawPane = new JPanel(new BorderLayout());
 		JLabel sawLbl;
 		JPanel movieListPane = new JPanel(new GridLayout(0,1));
@@ -63,19 +61,24 @@ public class MyPage extends JFrame implements ActionListener{
 		ImageIcon scIcon;
 		
 		JLabel imgLbl, imgLbl2;
+		
+		
+	//회원탈퇴
+	JPanel dropPane = new JPanel();
+		JLabel dropLbl1 = new JLabel("회원탈퇴");
+		JLabel dropLbl2 = new JLabel("탈퇴사유를 입력하여 주세요.");
+		JTextField dropTf = new JTextField(30);
+	
+	
 	//폰트 설정
 	Font ft = new Font("굴림",Font.BOLD,20);
 		
-	public MyPage() {
+	public MyPage() {//생성자
+		setLayout(new BorderLayout());
 		info();//사용자 정보 선언
 		menu();//메뉴판 선언
 		cardLayout();
 		moviesIsaw();
-		
-		//삭재대기
-		setSize(1200,600);
-		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	public void info() {//유저 정보
@@ -117,14 +120,12 @@ public class MyPage extends JFrame implements ActionListener{
 		menuPane.setBackground(Color.WHITE);
 		add(BorderLayout.WEST, menuPane);
 	}
-	
 	public void cardLayout() {
 		//카드레이아웃
 		cardPane.setLayout(card);
 		moviesIsaw();
 		
 	}
-	
 	public void moviesIsaw() {//내가 본영화
 		moviesIsawPane.setBackground(Color.red);
 		sawLbl = new JLabel("내가 본 영화",JLabel.LEFT);
@@ -133,7 +134,8 @@ public class MyPage extends JFrame implements ActionListener{
 		moviesIsawPane.add(BorderLayout.NORTH,sawLbl);
 		moviesIsawPane.add(BorderLayout.CENTER,movieListPane);
 		
-		movIcon = new ImageIcon("./img/beautifullove.jfif");
+		String movName = "beautifullove.jfif";
+		movIcon = new ImageIcon("./img/"+movName);
 		movImg = movIcon.getImage();
 		scImg = movImg.getScaledInstance(200, 280, Image.SCALE_SMOOTH);
 		scIcon = new ImageIcon(scImg);
@@ -152,6 +154,12 @@ public class MyPage extends JFrame implements ActionListener{
 		
 		add(moviesIsawPane);
 	}
+	public void dropUser() {
+//		dropPane;
+		infoBoxPane.setBorder(new LineBorder(Color.BLACK,5));
+		infoBoxPane.setBackground(Color.WHITE);
+		infoBoxPane.setPreferredSize(new Dimension(650,100));
+	}
 	
 	
 	
@@ -160,26 +168,19 @@ public class MyPage extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent ae) {
 		Object event = ae.getActionCommand();
 		if(event.equals("개인정보변경")) {
-			System.out.println("1");
+			System.out.println("개인정보변경");
 		}else if(event.equals("예매내역 조회/취소")) {
-			System.out.println("1");
+			System.out.println("예매내역 조회취소");
 		}else if(event.equals("내가 본 영화")) {
 			System.out.println("내가본영화");
 		}else if(event.equals("포인트 적립/사용내역")) {
-			System.out.println("1");
+			System.out.println("포인트 적립 사용내역");
 		}else if(event.equals("관람권등록")) {
-			System.out.println("1");
+			System.out.println("관람권등록");
 		}else if(event.equals("등급안내")) {
-			System.out.println("1");
+			System.out.println("등급안내");
 		}else if(event.equals("회원탈퇴")) {
-			System.out.println("1");
+			System.out.println("회원탈퇴");
 		}
 	}
-	
-	public static void main(String[] args) {
-		new MyPage();
-	}
-
-
-
 }

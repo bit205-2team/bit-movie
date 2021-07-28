@@ -19,7 +19,7 @@ public class BaseFrame extends JFrame implements ActionListener{
 	
 	SignUp sss = new SignUp();
 	QuickReservation qq = new QuickReservation();
-		
+	MyPage mp = new MyPage();
 		Font homeFnt = new Font("±¼¸²",Font.BOLD, 100);
 		Font menuFnt = new Font("±¼¸²",Font.BOLD, 40);
 		JPanel testPanel = new JPanel();
@@ -32,7 +32,7 @@ public class BaseFrame extends JFrame implements ActionListener{
 		
 		viewPane.add(BorderLayout.CENTER, new SignUp());
 //		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
-		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, qq);
+		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, mp);
 		baseSp.setDividerSize(0);
 		baseSp.setDividerLocation(200);
 		
