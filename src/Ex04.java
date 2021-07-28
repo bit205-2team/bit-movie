@@ -4,10 +4,10 @@ import java.awt.event.ActionListener;
  
 import javax.swing.JButton;
 import javax.swing.JFrame; 
- 
- 
+
 public class Ex04 extends JFrame implements ActionListener{
-    Container c;
+    
+	Container c;
     CardLayout card;
     JButton btn1, btn2, btn3;
     Ex04() {
