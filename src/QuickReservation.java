@@ -1,4 +1,4 @@
-
+    
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -12,8 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
-public class QuickReservation extends JPanel{
+    
+    
+	public class QuickReservation extends JPanel{
+    
+	
+		
    //selectmovie
    JPanel moviePane = new JPanel(new BorderLayout());
    JPanel titlePane = new JPanel();
@@ -117,8 +121,5 @@ public class QuickReservation extends JPanel{
       add(BorderLayout.WEST,moviePane);
    }
    
-   
-   
-
 }
    

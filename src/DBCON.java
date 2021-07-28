@@ -35,6 +35,7 @@ public class DBCON {
 	}
 	
 	public void dbClose() {
+		
 		try {
 			if(rs!=null) rs.close();
 			if(pstmt!=null) pstmt.close();
