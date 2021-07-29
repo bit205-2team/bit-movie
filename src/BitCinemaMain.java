@@ -1,6 +1,7 @@
 public class BitCinemaMain {
 
 	public BitCinemaMain() {
+		
 		BaseFrame bf = new BaseFrame();
 	}
  
