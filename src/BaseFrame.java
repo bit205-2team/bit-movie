@@ -15,29 +15,30 @@ import javax.swing.JSplitPane;
 public class BaseFrame extends JFrame implements ActionListener{
 	JSplitPane baseSp;
 	JSplitPane menuSp;
+		String menuBtnStr[] = {"영화","예매","극장","마이페이지"};
+		JButton menuBtn[]= new JButton[4];
 	JPanel viewPane = new JPanel();
 	
-	SignUp sss = new SignUp();
-	QuickReservation qq = new QuickReservation();
-	MyPage mp = new MyPage();
 		Font homeFnt = new Font("굴림",Font.BOLD, 100);
 		Font menuFnt = new Font("굴림",Font.BOLD, 40);
 		JPanel testPanel = new JPanel();
 	
+		
+		
 	// 메인 메뉴 카드레이아웃 구성
-	JPanel cardPane;
-	CardLayout card = new CardLayout();
+	JPanel fCardPane;
+	CardLayout fCard = new CardLayout();
 	
 	public BaseFrame() {
 		super("BIT CINEMA");
-//		setLocationRelativeTo(null);
+		
 		baseTop();
-//		viewPane.add(BorderLayout.CENTER,sss);
-//		System.out.println(sss.getClass());
+		fCardLayout();
+//		System.out.println(sss.getClass()); 객체 클래스 확인할떄 쓴다!
+		
 		
 		viewPane.add(BorderLayout.CENTER, new SignUp());
-//		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, viewPane);
-		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, mp);
+		baseSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, menuSp, fCardPane);
 		baseSp.setDividerSize(0);
 		baseSp.setDividerLocation(200);
 		
@@ -50,69 +51,91 @@ public class BaseFrame extends JFrame implements ActionListener{
 	}
 	
 	public void baseTop(){
-		JPanel TopPane = new JPanel();
-		JPanel BottomPane = new JPanel();
-		BottomPane.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5));
-		BottomPane.setBackground(Color.WHITE);
-		TopPane.setBackground(Color.WHITE);
+		JPanel titlePane = new JPanel();
+		JPanel menuPane = new JPanel();
+		menuPane.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5));
+		menuPane.setBackground(Color.WHITE);
+		titlePane.setBackground(Color.WHITE);
 		
 		
 		//BIT CIEMA 라벨
 		//클릭시 초기화면으로 복귀 기능 추가 필요?
 		JLabel lblHome = new JLabel("BIT CINEMA", JLabel.CENTER);
 		lblHome.setFont(homeFnt);
-		TopPane.add(lblHome);
-		
-		
-		//메인 메뉴
-		//라벨로 구성함, 라벨위로 올라갔을때 마우스버튼 이미지 변경 이벤트?, 클릭시 viewPane에 각 화면들 출력
-//		JLabel lblMovie = new JLabel("영화", JLabel.CENTER);
-//		JLabel lblTicketing = new JLabel("예매", JLabel.CENTER);
-//		JLabel lblMovieHouse = new JLabel("극장", JLabel.CENTER);
-//		JLabel lblMyPage = new JLabel("마이페이지", JLabel.CENTER);
-//		lblMovie.setFont(menuFnt);
-//		lblTicketing.setFont(menuFnt);
-//		lblMovieHouse.setFont(menuFnt);
-//		lblMyPage.setFont(menuFnt);
-//		BottomPane.add(lblMovie);
-//		BottomPane.add(lblTicketing);
-//		BottomPane.add(lblMovieHouse);
-//		BottomPane.add(lblMyPage);
+		titlePane.add(lblHome);
 		
 		
 		//버튼으로 구성함 나중에 생각해보자....
-		JButton movBtn = new JButton("영화");
-		JButton ticBtn = new JButton("예매");
-		JButton movHBtn = new JButton("극장");
-		JButton myPageBtn = new JButton("마이페이지");
+		for(int i=0; i<menuBtnStr.length; i++) {
+			menuBtn[i] = new JButton(menuBtnStr[i]);
+			menuBtn[i].setFont(menuFnt);
+			menuPane.add(menuBtn[i]);
+			menuBtn[i].addActionListener(this);
+		}
+//		JButton movBtn = new JButton("영화");
+//		JButton ticBtn = new JButton("예매");
+//		JButton movHBtn = new JButton("극장");
+//		JButton myPageBtn = new JButton("마이페이지");
 		
-		movBtn.setFont(menuFnt);
-		ticBtn.setFont(menuFnt);
-		movHBtn.setFont(menuFnt);
-		myPageBtn.setFont(menuFnt);
-		
-		movBtn.setBackground(Color.WHITE);;
+//		movBtn.setFont(menuFnt);
 //		ticBtn.setFont(menuFnt);
 //		movHBtn.setFont(menuFnt);
 //		myPageBtn.setFont(menuFnt);
+//		
+//		movBtn.setBackground(Color.WHITE);;
+//
+//		BottomPane.add(movBtn);
+//		BottomPane.add(ticBtn);
+//		BottomPane.add(movHBtn);
+//		BottomPane.add(myPageBtn);
 		
-		BottomPane.add(movBtn);
-		BottomPane.add(ticBtn);
-		BottomPane.add(movHBtn);
-		BottomPane.add(myPageBtn);
 		
-		
-		menuSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, TopPane,BottomPane);
+		menuSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, titlePane,menuPane);
 		menuSp.setDividerLocation(130);
 		menuSp.setDividerSize(0);
+		
+		
 	}
-	public void mainPanel() {
+	
+	//Frame CENTER
+	public void fCardLayout() {//viewPane 영역에 표기할 카트레이아웃
+		fCardPane = new JPanel(fCard);
+		
+		MovieClass mc = new MovieClass();
+		MyPage mp = new MyPage();
+		SignUp sss = new SignUp();
+		QuickReservation qq = new QuickReservation();
+		
+		fCardPane.add(mc,"영화");
+		fCardPane.add(mp,"마이페이지");
 		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent ae) {
+		Object event = ae.getActionCommand();
+		
+		if(event.equals("영화")) {
+			fCard.show(fCardPane, "영화");
+			System.out.println("클릭 영화"); 
+			
+		}else if(event.equals("예매")) {
+			System.out.println("클릭 영화");
+			
+			
+		}else if(event.equals("극장")) {
+			System.out.println("클릭 영화");
+			
+		}else if(event.equals("마이페이지")) {
+			fCard.show(fCardPane, "마이페이지");
+			System.out.println("클릭 마이페이지");
+			
+		}else if(event.equals("로그인")) {
+			System.out.println("클릭 영화");
+			
+		}else if(event.equals("회원가입")) {
+			
+		}
 		
 	}
 

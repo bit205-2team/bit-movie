@@ -48,8 +48,8 @@ public class MyPage extends JPanel implements ActionListener{
 		JButton menuBtn[] = new JButton[12];
 		
 	//카드레이아웃 //
-	JPanel cardPane;
-	CardLayout card = new CardLayout();
+	JPanel myCardPane;
+	CardLayout myCard = new CardLayout();
 	
 	//내가 본 영화//////////////////////////////////////아직못함
 	JPanel moviesIsawPane = new JPanel(new BorderLayout());
@@ -96,10 +96,10 @@ public class MyPage extends JPanel implements ActionListener{
 		setLayout(new BorderLayout());
 		info();//사용자 정보 선언
 		menu();//메뉴판 선언
-		cardLayout();
+		myCardLayout();
 		moviesIsaw();
 	}
-	
+	//Panel NORTH
 	public void info() {//유저 정보
 		//유저 정보 표기박스 설정
 		infoBoxPane.setBorder(new LineBorder(Color.BLACK,5));
@@ -125,6 +125,7 @@ public class MyPage extends JPanel implements ActionListener{
 		add(BorderLayout.NORTH,topPane);
 		
 	}
+	//Panel WEST
 	public void menu() {//메뉴버튼 모음
 		for(int i=0; i<menuText.length; i++) {//메뉴라벨&버튼 생성 반복문
 			if(menuText[i].equals("나의 예매내역") || menuText[i].equals("포인트/관람권") || menuText[i].equals("")) {
@@ -140,21 +141,27 @@ public class MyPage extends JPanel implements ActionListener{
 		menuPane.setBackground(Color.WHITE);
 		add(BorderLayout.WEST, menuPane);
 	}
-	public void cardLayout() {//카드레이아웃
-		cardPane = new JPanel();
-		cardPane.setBackground(Color.WHITE);
+	
+	//Panel CENTER
+	public void myCardLayout() {//카드레이아웃
 		//카드레이아웃
+		myCardPane = new JPanel();
+		myCardPane.setBackground(Color.WHITE);
+		myCardPane.setLayout(myCard);
+
 		reservationTicket();
 		moviesIsaw();
 		dropUser();
-		cardPane.setLayout(card);
-		cardPane.add(rtBasePane, "예매내역 확인/취소");
-		cardPane.add(dropBasePane, "회원탈퇴");
-		cardPane.add(moviesIsawPane, "내가 본 영화");
+		myCardPane.add(rtBasePane, "예매내역 확인/취소");
+		myCardPane.add(dropBasePane, "회원탈퇴");
+		myCardPane.add(moviesIsawPane, "내가 본 영화");
 		
-		add(cardPane);
+		add(myCardPane);
 		
 	}
+	
+	//아래서부터 Card Layout으로 삽입할 pane 구성
+	
 	public void moviesIsaw() {//내가 본영화
 		moviesIsawPane.setBackground(Color.WHITE);
 		sawLbl = new JLabel("     내가 본 영화",JLabel.LEFT);
@@ -251,9 +258,9 @@ public class MyPage extends JPanel implements ActionListener{
 		if(event.equals("개인정보변경")) {
 			System.out.println("개인정보변경");
 			
-		}else if(event.equals("예매내역 확인/취소")) {card.show(cardPane,"예매내역 확인/취소");
+		}else if(event.equals("예매내역 확인/취소")) {myCard.show(myCardPane,"예매내역 확인/취소");
 		
-		}else if(event.equals("내가 본 영화")) {card.show(cardPane, "내가 본 영화");
+		}else if(event.equals("내가 본 영화")) {myCard.show(myCardPane, "내가 본 영화");
 		
 		}else if(event.equals("포인트 적립/사용내역")) {
 			System.out.println("포인트 적립 사용내역");
@@ -264,7 +271,7 @@ public class MyPage extends JPanel implements ActionListener{
 		}else if(event.equals("등급안내")) {
 			System.out.println("등급안내");
 			
-		}else if(event.equals("회원탈퇴")) { card.show(cardPane, "회원탈퇴");
+		}else if(event.equals("회원탈퇴")) { myCard.show(myCardPane, "회원탈퇴");
 		
 		}else if(event.equals("예매취소")) {
 			System.out.println("예매취소!!!");
