@@ -30,7 +30,6 @@ public class MovieClass extends JPanel implements ActionListener{
 	JScrollPane scrollPane;
 	//JPanel viewPane = new JPanel(new BorderLayout());
 	
-	JButton b1,b2,b3,b4,b5,b6,b7,b8;
 	JButton btn [];
 	JButton jb;
 	
