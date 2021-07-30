@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import Reservation.QuickReservation;
+
 public class BaseFrame extends JFrame implements ActionListener{
 	JSplitPane baseSp;
 	JSplitPane menuSp;

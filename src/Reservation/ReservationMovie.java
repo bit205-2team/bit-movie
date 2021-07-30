@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import DBconnection.MovieDAO;
+
 public class ReservationMovie extends JFrame{//넘길때 JPane으로 바꾸기
 	JPanel setViewPane = new JPanel(new BorderLayout());//baseframe에서 viewpane안에 들어갈 pane
 	JPanel detailMenuPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 30));//빠른예매/상영시간표
