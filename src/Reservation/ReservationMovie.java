@@ -1,4 +1,5 @@
 package Reservation;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class ReservationMovie extends JPanel{//넘길때 JPane으로 바꾸기
+public class ReservationMovie extends JFrame{//넘길때 JPane으로 바꾸기
 	JPanel setViewPane = new JPanel(new BorderLayout());//baseframe에서 viewpane안에 들어갈 pane
 	JPanel detailMenuPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 30));//빠른예매/상영시간표
 	JPanel viewCenterPane = new JPanel(new BorderLayout());//날짜랑 시간표 들어갈 큰 pane
@@ -44,8 +45,6 @@ public class ReservationMovie extends JPanel{//넘길때 JPane으로 바꾸기
 		boundaryLbl.setFont(detailMenuFnt);
 		movTableLbl.setFont(detailMenuFnt);
 		
-		QuickReservation sss = new QuickReservation();
-		
 		quickReserveLbl.setBackground(Color.WHITE);
 		movTableLbl.setBackground(Color.WHITE);
 		
@@ -53,12 +52,15 @@ public class ReservationMovie extends JPanel{//넘길때 JPane으로 바꾸기
 		detailMenuPane.add(boundaryLbl);
 		detailMenuPane.add(movTableLbl);
 		
-		setViewPane.add(sss);
+		setViewPane.add(viewCenterPane);
+		
+		//dbtest
+		MovieDAO dao = new MovieDAO();
+		List list = dao.allRecord();
 		
 		
-
 		//빠른예매 메소드
-		quickReservation();
+	//	quickReservation();
 		
 		//이메소드 나중에 이벤트처리 메소드로 옮기기
 		movieSchedule();
@@ -66,9 +68,9 @@ public class ReservationMovie extends JPanel{//넘길때 JPane으로 바꾸기
 		
 		//test용 / 넘길때 빼기
 		add(setViewPane);
-//		setSize(1000,600);
-//		setVisible(true);
-//		setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+		setSize(1000,600);
+		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
 	}
 	
 	//빠른예매(defaultmenu)
