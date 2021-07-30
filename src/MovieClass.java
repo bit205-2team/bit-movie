@@ -93,7 +93,7 @@ public class MovieClass extends JPanel implements ActionListener{
 	
 	public void blackWidow() {//영화 설명창 열기
 		//이미지 크기변환
-		ImageIcon image2 = new ImageIcon(".\\src\\img\\blackwidow.jfif");
+		ImageIcon image2 = new ImageIcon("./img/blackwidow.jfif");
 		Image img = image2.getImage();
 		Image im2 = img.getScaledInstance(650, 850, Image.SCALE_SMOOTH);
 		ImageIcon img2 = new ImageIcon(im2);
@@ -112,7 +112,7 @@ public class MovieClass extends JPanel implements ActionListener{
       
 	try {
 		String movieIm = "blackwidow.txt";
-		File f = new File("./src/txt/"+movieIm);
+		File f = new File("./txt/"+movieIm);
 		FileReader fr = new FileReader(f);
 		BufferedReader br = new BufferedReader(fr);
 		

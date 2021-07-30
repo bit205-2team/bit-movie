@@ -23,8 +23,6 @@ public class BaseFrame extends JFrame implements ActionListener{
 		Font menuFnt = new Font("굴림",Font.BOLD, 40);
 		JPanel testPanel = new JPanel();
 	
-		
-		
 	// 메인 메뉴 카드레이아웃 구성
 	JPanel fCardPane;
 	CardLayout fCard = new CardLayout();
@@ -57,12 +55,11 @@ public class BaseFrame extends JFrame implements ActionListener{
 		menuPane.setBackground(Color.WHITE);
 		titlePane.setBackground(Color.WHITE);
 		
-		
 		//BIT CIEMA 라벨
 		//클릭시 초기화면으로 복귀 기능 추가 필요?
-		JLabel lblHome = new JLabel("BIT CINEMA", JLabel.CENTER);
-		lblHome.setFont(homeFnt);
-		titlePane.add(lblHome);
+		JLabel homeLbl = new JLabel("BIT CINEMA", JLabel.CENTER);
+		homeLbl.setFont(homeFnt);
+		titlePane.add(homeLbl);
 		
 		
 		//버튼으로 구성함 나중에 생각해보자....
@@ -72,23 +69,6 @@ public class BaseFrame extends JFrame implements ActionListener{
 			menuPane.add(menuBtn[i]);
 			menuBtn[i].addActionListener(this);
 		}
-//		JButton movBtn = new JButton("영화");
-//		JButton ticBtn = new JButton("예매");
-//		JButton movHBtn = new JButton("극장");
-//		JButton myPageBtn = new JButton("마이페이지");
-		
-//		movBtn.setFont(menuFnt);
-//		ticBtn.setFont(menuFnt);
-//		movHBtn.setFont(menuFnt);
-//		myPageBtn.setFont(menuFnt);
-//		
-//		movBtn.setBackground(Color.WHITE);;
-//
-//		BottomPane.add(movBtn);
-//		BottomPane.add(ticBtn);
-//		BottomPane.add(movHBtn);
-//		BottomPane.add(myPageBtn);
-		
 		
 		menuSp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, titlePane,menuPane);
 		menuSp.setDividerLocation(130);

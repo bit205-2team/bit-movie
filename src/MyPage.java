@@ -83,10 +83,12 @@ public class MyPage extends JPanel implements ActionListener{
 	
 	//회원탈퇴/////////////////////////////////////////////
 	JPanel dropBasePane;
+	JPanel dropPwdPane;
 	JPanel dropPane;
 		JLabel dropLbl1;
 		JLabel dropLbl2;
 		JTextField dropTf;
+		
 	
 	
 	//폰트 설정
@@ -187,23 +189,7 @@ public class MyPage extends JPanel implements ActionListener{
 		movieListPane.add(moviePane);
 		movieListPane.add(moviePane);
 	}
-	public void dropUser() {//회원탈퇴
-		dropBasePane = new JPanel();
-		dropBasePane.setBackground(Color.WHITE);
-		dropPane = new JPanel(new BorderLayout());
-		dropLbl1 = new JLabel("회원탈퇴");
-		dropLbl2 = new JLabel("탈퇴사유를 입력하여 주세요.");
-		dropTf = new JTextField(30);
-		
-		dropPane.setBorder(new LineBorder(Color.BLACK,5));
-		dropPane.setBackground(Color.WHITE);
-		dropPane.setPreferredSize(new Dimension(300,100));
-		
-		dropPane.add(BorderLayout.NORTH, dropLbl1);
-		dropPane.add(BorderLayout.CENTER, dropLbl2);
-		dropBasePane.add(dropPane);
-		
-	}
+
 	
 	public void reservationTicket() {//예매내역 조회 취소
 		rtBasePane = new JPanel();
@@ -252,6 +238,46 @@ public class MyPage extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void dropUser() {//회원탈퇴
+		dropBasePane = new JPanel();
+		dropBasePane.setBackground(Color.WHITE);
+			dropPwdPane = new JPanel(new BorderLayout());
+			dropPwdPane.setBackground(Color.WHITE);
+				JLabel lbl1 = new JLabel("본인인증");
+					JPanel pane = new JPanel(new GridLayout(2,2));
+						pane.setPreferredSize(new Dimension(300,150));
+						pane.setBackground(Color.WHITE);
+					JLabel lbl2 = new JLabel("아이디");
+					JLabel lbl3 = new JLabel("비밀번호");
+					JLabel lbl4 = new JLabel("idididididi");
+					JTextField tf1 = new JTextField(30);
+				JButton btn = new JButton("확인");
+				btn.addActionListener(this);
+		
+		dropPwdPane.add(BorderLayout.NORTH, lbl1);
+			pane.add(lbl2);
+			pane.add(lbl3);
+			pane.add(lbl4);
+			pane.add(tf1);
+		dropPwdPane.add(pane);
+		dropPwdPane.add(BorderLayout.SOUTH, btn);
+		dropBasePane.add(dropPwdPane);
+				
+		dropPane = new JPanel(new BorderLayout());
+		dropLbl1 = new JLabel("회원탈퇴");
+		dropLbl2 = new JLabel("탈퇴사유를 입력하여 주세요.");
+		dropTf = new JTextField(30);
+		
+		dropPane.setBorder(new LineBorder(Color.BLACK,5));
+		dropPane.setBackground(Color.WHITE);
+		dropPane.setPreferredSize(new Dimension(300,100));
+		
+		dropPane.add(BorderLayout.NORTH, dropLbl1);
+		dropPane.add(BorderLayout.CENTER, dropLbl2);
+		dropBasePane.add(dropPane);
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Object event = ae.getActionCommand();
@@ -275,6 +301,8 @@ public class MyPage extends JPanel implements ActionListener{
 		
 		}else if(event.equals("예매취소")) {
 			System.out.println("예매취소!!!");
+		}else if(event.equals("확인")) {
+			System.out.println("아브라카타브라 본인인증");
 		}
 	}
 }
