@@ -17,8 +17,9 @@ public class MovieDAO extends DBCON {
 		try {
 			//1.db연결
 			dbConn();
-			String sql = "select mem_no, username, tel, email, addr, "
-					+ "to_char(write_date,'YYYY-MM-DD') write_date from member order by username asc";
+			String sql = "select movie_code, age_limit,mname,genre,to_char(release_date,'YYYY-MM-DD') release_date,"
+					+ "to_char(end_date,'YYYY-MM-DD') end_date ,run_time,m_distributor, "
+					+ "img_addr,summary, movie_round,grade,mvp from movie order by release_date asc";
 			//2. preparestatement생성
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

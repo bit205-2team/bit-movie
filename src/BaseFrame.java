@@ -87,9 +87,10 @@ public class BaseFrame extends JFrame implements ActionListener{
 		MyPage mp = new MyPage();
 		SignUp sss = new SignUp();
 		QuickReservation qq = new QuickReservation();
-		
+		MoviePage mpp = new MoviePage();
 		fCardPane.add(mc,"영화");
 		fCardPane.add(mp,"마이페이지");
+		fCardPane.add(mpp,"예매");
 		
 	}
 
@@ -99,11 +100,11 @@ public class BaseFrame extends JFrame implements ActionListener{
 		
 		if(event.equals("영화")) {
 			fCard.show(fCardPane, "영화");
+			
 			System.out.println("클릭 영화"); 
 			
 		}else if(event.equals("예매")) {
-			System.out.println("클릭 영화");
-			
+			fCard.show(fCardPane, "예매");
 			
 		}else if(event.equals("극장")) {
 			System.out.println("클릭 영화");
