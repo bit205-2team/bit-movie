@@ -57,8 +57,8 @@ public class ReservationMovie extends JFrame{//넘길때 JPane으로 바꾸기
 		setViewPane.add(viewCenterPane);
 		
 		//dbtest
-		MovieDAO dao = new MovieDAO();
-		List list = dao.allRecord();
+//		MovieDAO dao = new MovieDAO();
+//		List list = dao.allRecord();
 		
 		
 		//빠른예매 메소드

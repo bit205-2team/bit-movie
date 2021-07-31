@@ -22,7 +22,7 @@ public class TitlePanel extends JPanel {
 	  add(titleLabel2);
 	  add(titleLabel1);
 	  setBounds(10,10,1165,30);
-	  setBackground(Color.orange);
+	  //setBackground(Color.orange);
 	}
 
 }

@@ -78,7 +78,7 @@ public class SeatReservation extends JPanel {
       setScreenPanel.setBounds(10,100,582,430);
      
       screenPanel.setBorder(screenpanLine);
-      screenPanel.setBackground(Color.orange);
+      screenPanel.setBackground(Color.LIGHT_GRAY);
       screenPanel.setBounds(40, 120, 520, 45);
       screenPanel.add(screenLabel);
       

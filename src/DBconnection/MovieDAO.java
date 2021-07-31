@@ -3,18 +3,22 @@ package DBconnection;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class MovieDAO extends DBCON {
 	
 	public MovieDAO() {
-
+		
+		
 	}
 	
-	// 회원전체선택
-	public List<MovieVO> allRecord() {
+	// 회원 아이디 찾기
+	public List<MovieVO> selectID() {
 		
 		List<MovieVO> list = new ArrayList<MovieVO>();
 		
 		try {
+			
 			//1.db연결
 			dbConn();
 			String sql = "select mem_no, username, tel, email, addr, "
@@ -33,6 +37,7 @@ public class MovieDAO extends DBCON {
 //				vo.setWrite_date(rs.getString(6));
 				list.add(vo);
 				
+				
 			}
 		}catch(Exception e) {
 			System.out.println("전체회워선택 에러 발생");
@@ -43,19 +48,61 @@ public class MovieDAO extends DBCON {
 		return list;
 	}
 	
+	//회원 아이디 중복 검색
+	public boolean idSelect(String id) {
+		
+		String rc = null;
+		boolean idcheck = false;
+		String id1 = null;
+		try {
+			
+			dbConn();
+			id1 = id;
+			id = "select id from muser where id ="+"'"+id+"'";
+			String sql = id;
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				rc = rs.getString(1);
+			}
+			
+			if(id1.equals(rc)) idcheck = true;
+		
+		}catch(Exception e) {
+			System.out.println("회원 검색 오류 발생");
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
+
+		return idcheck;
+	}
+	
+	
 	// 회원추가
 	public int insertRecord(MovieVO vo) {
+		
 		int cnt=0;
+		
 		try {
+			
 			dbConn();
-			String sql = "insert into member(mem_no, email, addr, username, tel ) values(mem_sq.nextval, ?,?,?,?)";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, vo.getEmail());
-//			pstmt.setString(2, vo.getAddr());
-//			pstmt.setString(3, vo.getUsername());
-//			pstmt.setString(4, vo.getTel());
+			
+			String sql = "INSERT INTO muser values(?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,0,0,'GOLD',0,TO_DATE('2021-07-03','YYYY-MM-DD'))";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getUser_id());
+			pstmt.setString(2, vo.getUser_password());
+			pstmt.setString(3, vo.getUser_name());
+			pstmt.setString(4, vo.getUser_birth());
+			pstmt.setString(5, vo.getUser_tel());
 			
 			cnt = pstmt.executeUpdate();
+			
 			
 		}catch(Exception e) {
 			System.out.println("회원추가에러 발생");
@@ -66,7 +113,7 @@ public class MovieDAO extends DBCON {
 		return cnt;
 	}
 	
-	// 회원수정             번호,연락처,이메일,주소
+	// 회원수정               번호,연락처,이메일,주소
 	public int updateRecord(MovieVO vo) {
 		int cnt=0;
 		try {
@@ -90,23 +137,6 @@ public class MovieDAO extends DBCON {
 		return cnt;
 	}
 	
-	// 회원삭제
-	public int deleteRecord(int mem_no) {
-		int cnt=0;
-		try {
-			dbConn();
-			String sql = "delete from member where mem_no=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, mem_no);
-			cnt = pstmt.executeUpdate();
-		}catch(Exception e) {
-			System.out.println("상원삭제 에러 발생");
-			e.printStackTrace();
-		}finally {
-			dbClose();
-		}
-		return cnt;
-	}
 	
 	// 검색
 	public List<MovieVO> searchRecord(String search, String fieldName) {

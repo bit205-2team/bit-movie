@@ -7,8 +7,28 @@ public class MovieVO {
 	private String user_name;
 	private String user_birth;
 	private String user_email;
+	private String user_tel;
 	
+
+// 회원가입 셋
+	public void setUser_Member(String User_id, String User_password, String User_name, String User_birth, String User_tel, String User_email ) {
+		this.user_id = User_id;
+		this.user_password = User_password;
+		this.user_name = User_name;
+		this.user_birth = User_birth;
+		this.user_email = User_email;
+		this.user_tel = User_tel;
+		
+	}
 	
+	public String getUser_tel() {
+		return user_tel;
+	}
+
+	public void setUser_tel(String user_tel) {
+		this.user_tel = user_tel;
+	}
+
 	public String getUser_id() {
 		return user_id;
 	}

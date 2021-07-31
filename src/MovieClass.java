@@ -201,16 +201,18 @@ public class MovieClass extends JPanel implements ActionListener{
 		JScrollPane jsp = new JScrollPane(jp);
 		btn = new JButton[testList.size()];
 		JButton jj = new JButton("현재상영중");
+		jj.setBackground(Color.lightGray);
 		JButton jj2 = new JButton("상영예정작");
+		jj2.setBackground(Color.lightGray);
 		
 		jp2.add(jj);
 		jp2.add(jj2);
 		
 		jp.setLayout(new GridLayout(0,5,25,50));
-		jp.setBackground(Color.white);
-		jp2.setBackground(Color.white);
+//		jp.setBackground(Color.white);
+//		jp2.setBackground(Color.white);
 		
-		setBackground(Color.WHITE);
+		//setBackground(Color.WHITE);
 		add(BorderLayout.NORTH,jp2);
 		
 		
@@ -228,7 +230,7 @@ public class MovieClass extends JPanel implements ActionListener{
 			jp3.add(jb);
 			jp3.add(jl);
 			//jb.setFont(ftt);
-			jp3.setBackground(Color.WHITE);
+			//jp3.setBackground(Color.WHITE);
 			jb.setBorderPainted(false);
 			jb.setContentAreaFilled(false);
 			jb.setPreferredSize(new Dimension(10, 30));

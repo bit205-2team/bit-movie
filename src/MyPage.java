@@ -31,16 +31,17 @@ public class MyPage extends JPanel implements ActionListener{
 		
 		JPanel topPane = new JPanel();
 		JPanel infoBoxPane = new JPanel(new BorderLayout());
-			JPanel namePane = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 10));
-			String name = "홍길동";//db정보 연동 필요
-			JLabel nameLbl = new JLabel(name+"님");
-			JButton infoBtn = new JButton("개인정보변경");;
+		JPanel namePane = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 10));
+		String name = "홍길동";//db정보 연동 필요
+		JLabel nameLbl = new JLabel(name+"님");
+		JButton infoBtn = new JButton("개인정보변경");;
+		
  
-			JPanel infoBottomPane = new JPanel();
-			String rank = "gold";//db정보 연동 필요
-			int point = 5300;//db정보 연동 필요
-			int ticket = 0;//db정보 연동 필요
-			JLabel infoLbl = new JLabel("고객님은"+rank+"등급     "+"사용 가능 포인트:"+point+"점      "+"관람권:"+ticket+"장", JLabel.CENTER);
+		JPanel infoBottomPane = new JPanel();
+		String rank = "gold";//db정보 연동 필요
+		int point = 5300;//db정보 연동 필요
+		int ticket = 0;//db정보 연동 필요
+		JLabel infoLbl = new JLabel("고객님은"+rank+"등급     "+"사용 가능 포인트:"+point+"점      "+"관람권:"+ticket+"장", JLabel.CENTER);
 			
 	//메뉴 판넬 그룹
 	JPanel menuPane = new JPanel(new GridLayout(0, 1, 0, 5));
@@ -105,7 +106,7 @@ public class MyPage extends JPanel implements ActionListener{
 	public void info() {//유저 정보
 		//유저 정보 표기박스 설정
 		infoBoxPane.setBorder(new LineBorder(Color.BLACK,5));
-		infoBoxPane.setBackground(Color.WHITE);
+
 		infoBoxPane.setPreferredSize(new Dimension(650,100));
 		
 		//유저이름&정보변경
@@ -113,8 +114,9 @@ public class MyPage extends JPanel implements ActionListener{
 		namePane.add(nameLbl);//유저이름
 		 
 		infoBtn.addActionListener(this);
+		infoBtn.setBackground(Color.cyan);
 		namePane.add(infoBtn);//회원정보수정 버튼
-		namePane.setBackground(Color.WHITE);
+
 		infoBoxPane.add(BorderLayout.NORTH,namePane);//유저이름&버튼 배치
 		
 		//유저정보
@@ -122,7 +124,7 @@ public class MyPage extends JPanel implements ActionListener{
 		infoBoxPane.add(infoLbl);
 		
 		//판넬 세팅
-		topPane.setBackground(Color.WHITE);
+
 		topPane.add(infoBoxPane);
 		add(BorderLayout.NORTH,topPane);
 		
@@ -137,10 +139,11 @@ public class MyPage extends JPanel implements ActionListener{
 			}else {
 				menuBtn[i] = new JButton(menuText[i]);
 				menuPane.add(menuBtn[i]);
+				menuBtn[i].setBackground(Color.white);
 				menuBtn[i].addActionListener(this);
 			}
 		}
-		menuPane.setBackground(Color.WHITE);
+
 		add(BorderLayout.WEST, menuPane);
 	}
 	
@@ -148,7 +151,7 @@ public class MyPage extends JPanel implements ActionListener{
 	public void myCardLayout() {//카드레이아웃
 		//카드레이아웃
 		myCardPane = new JPanel();
-		myCardPane.setBackground(Color.WHITE);
+
 		myCardPane.setLayout(myCard);
 
 		reservationTicket();
@@ -165,7 +168,7 @@ public class MyPage extends JPanel implements ActionListener{
 	//아래서부터 Card Layout으로 삽입할 pane 구성
 	
 	public void moviesIsaw() {//내가 본영화
-		moviesIsawPane.setBackground(Color.WHITE);
+
 		sawLbl = new JLabel("     내가 본 영화",JLabel.LEFT);
 		sawLbl.setFont(ft);
 		
@@ -206,10 +209,7 @@ public class MyPage extends JPanel implements ActionListener{
 		rtDelBtn = new JButton("예매취소");
 		
 		//판넬 세팅
-		rtTable.setBackground(Color.WHITE);
-		rtBasePane.setBackground(Color.WHITE);
-		rtSp.setBackground(Color.white);
-		rtPane.setBackground(Color.WHITE);
+
 		rtPane.setPreferredSize(new Dimension(800,440));
 		
 		//판넬 구성....
@@ -240,13 +240,13 @@ public class MyPage extends JPanel implements ActionListener{
 	
 	public void dropUser() {//회원탈퇴
 		dropBasePane = new JPanel();
-		dropBasePane.setBackground(Color.WHITE);
+
 			dropPwdPane = new JPanel(new BorderLayout());
-			dropPwdPane.setBackground(Color.WHITE);
+
 				JLabel lbl1 = new JLabel("본인인증");
 					JPanel pane = new JPanel(new GridLayout(2,2));
 						pane.setPreferredSize(new Dimension(300,150));
-						pane.setBackground(Color.WHITE);
+
 					JLabel lbl2 = new JLabel("아이디");
 					JLabel lbl3 = new JLabel("비밀번호");
 					JLabel lbl4 = new JLabel("idididididi");
@@ -269,7 +269,7 @@ public class MyPage extends JPanel implements ActionListener{
 		dropTf = new JTextField(30);
 		
 		dropPane.setBorder(new LineBorder(Color.BLACK,5));
-		dropPane.setBackground(Color.WHITE);
+
 		dropPane.setPreferredSize(new Dimension(300,100));
 		
 		dropPane.add(BorderLayout.NORTH, dropLbl1);
