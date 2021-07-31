@@ -7,7 +7,7 @@ public class MovieVO {
 	private String pwd;
 	private String name;
 	private String birth;
-	private String user_email;
+	private String email;
 	private String tel;
 	private int point;
 	private int pt_ticket;
@@ -344,12 +344,12 @@ public class MovieVO {
 		this.tic_date = tic_date;
 	}
 
-	public String getUser_email() {
-		return user_email;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setEmail(String user_email) {
+		this.email = user_email;
 	}
 	
 	public MovieVO() {

@@ -46,10 +46,13 @@ public class MoviePage extends JPanel implements ActionListener{
 		movieBasePane.add(cardPane);
 	}
 	
-	public void poster() {
+	public void nowPoster() {
 		nowPane = new JPanel(new GridLayout(0, 4, 25, 50));
 		nowSp = new JScrollPane(nowPane);
 		
+		for(int i=0; i<5;i++) {
+			
+		}
 	}
 
 	@Override
