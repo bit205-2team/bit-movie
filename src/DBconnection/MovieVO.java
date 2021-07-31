@@ -348,10 +348,21 @@ public class MovieVO {
 		return email;
 	}
 
-	public void setEmail(String user_email) {
-		this.email = user_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
+	
+	// 회원가입 셋
+	public void setMember(String id, String pwd, String name, String birth, String tel, String email ) {
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.tel = tel;
+   }
+
 	public MovieVO() {
 		
 	}

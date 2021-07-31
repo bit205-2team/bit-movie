@@ -10,7 +10,7 @@ public class MovieDAO extends DBCON {
 	}
 	
 	// 회원전체선택
-	public List<MovieVO> allRecord() {
+	public List<MovieVO> allMovieRecord() {
 		
 		List<MovieVO> list = new ArrayList<MovieVO>();
 		
