@@ -86,8 +86,10 @@ public class BaseFrame extends JFrame implements ActionListener{
 		MovieClass mc = new MovieClass();
 		MyPage mp = new MyPage();
 		SignUp sss = new SignUp();
-		QuickReservation qq = new QuickReservation();
+//		QuickReservation qq = new QuickReservation();
 		MoviePage mpp = new MoviePage();
+		
+		
 		fCardPane.add(mc,"영화");
 		fCardPane.add(mp,"마이페이지");
 		fCardPane.add(mpp,"예매");

@@ -26,9 +26,11 @@ public class MovieVO {
 	private String img_addr;
 	private String summary;
 	private int movie_round;
-	private int grade;
+	private double grade;
 	private int mvp;
+	private String status;
 	
+
 	//상영관 관련
 	private String theater;
 	private int seat;
@@ -54,6 +56,13 @@ public class MovieVO {
 	
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getMovie_code() {
 		return movie_code;
@@ -143,11 +152,11 @@ public class MovieVO {
 		this.movie_round = movie_round;
 	}
 
-	public int getGrade() {
+	public double getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(double grade) {
 		this.grade = grade;
 	}
 
