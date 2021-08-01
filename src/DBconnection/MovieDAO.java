@@ -5,10 +5,67 @@ import java.util.List;
 
 public class MovieDAO extends DBCON {
 	
+	
+//수정
 	public MovieDAO() {
 
 	}
 	
+	// 회원추가
+		public int insertRecord(MovieVO vo) {
+			int cnt=0;
+			try {
+				dbConn();
+				String sql = "INSERT INTO muser values(?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,0,0,'UNRANK',0,TO_DATE('2021-07-03','YYYY-MM-DD'),?)";
+				
+				pstmt = conn.prepareStatement(sql);
+			
+				pstmt.setString(1, vo.getId());
+				pstmt.setString(2, vo.getPwd());
+				pstmt.setString(3, vo.getName());
+				pstmt.setString(4, vo.getBirth());
+				pstmt.setString(5, vo.getTel());
+				pstmt.setString(6, vo.getEmail());
+				
+				cnt = pstmt.executeUpdate();
+			}catch(Exception e) {
+				System.out.println("회원추가에러 발생");
+				e.printStackTrace();
+			}finally {
+				dbClose();
+			}
+			return cnt;
+		}
+	
+		//회원 아이디 중복 검색 (추가)
+		public boolean idSelect(String id) {
+			String rc = null;
+			boolean idcheck = false;
+			String id1 = null;
+			
+			try {
+				dbConn();
+				id1 = id;
+				id = "select id from muser where id ="+"'"+id+"'";
+				String sql = id;
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+	
+				while(rs.next()) {
+					rc = rs.getString(1);
+				}
+				if(id1.equals(rc)) idcheck = true;
+			}catch(Exception e) {
+				System.out.println("회원 검색 오류 발생");
+				e.printStackTrace();
+			}finally {
+				dbClose();
+			}
+			return idcheck;
+		}
+	
+		
 	// 영화 전체 선택
 	public List<MovieVO> allMovieRecord() {
 		
@@ -37,6 +94,12 @@ public class MovieDAO extends DBCON {
 		}
 		return list;
 	}
+	
+
+	
+	
+	
+	
 	
 	// 영화포스터정보 가져오기
 	public List<MovieVO> moviePoster(int selectNum) {

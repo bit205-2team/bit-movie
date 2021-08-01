@@ -23,7 +23,7 @@ public class SwingEX11 extends JFrame implements ActionListener{
 	jb2 = new JButton("¹öÆ°2");
 	jp = new JPanel(new BorderLayout()) {
 		public void paintComponent(Graphics g) {
-				img = new ImageIcon(".\\src\\img\\"+ss[num]);// = new ImageIcon("./src/img/"+ss);
+				img = new ImageIcon("./img/"+ss[num]);// = new ImageIcon("./src/img/"+ss);
 				 Image img1 = img.getImage();
 				 Image im2 = img1.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 				 ImageIcon img2 = new ImageIcon(im2);

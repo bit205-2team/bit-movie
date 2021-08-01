@@ -1,5 +1,7 @@
-public class BitCinemaMain {
 
+
+public class BitCinemaMain {
+	static String userid = null;
 	public BitCinemaMain() {
 		
 		BaseFrame bf = new BaseFrame();
