@@ -18,7 +18,6 @@ import javax.swing.border.TitledBorder;
 
 import Reservation.QuickReservation;
 import Reservation.ReservationMovieYs;
-import Reservation.SeatReservation;
 
 // 수정파일
 public class BaseFrame extends JFrame implements ActionListener{
@@ -212,10 +211,10 @@ public class BaseFrame extends JFrame implements ActionListener{
 		ReservationMovieYs Ys = new ReservationMovieYs();
 		MoviePage movp = new MoviePage();
 		Theater theater = new Theater();
-		
+		SeatReservation sr = new SeatReservation(); 
 		fCardPane.add(movp,"영화");
 		fCardPane.add(mp,"마이페이지");
-		fCardPane.add(Ys,"예매");
+		fCardPane.add(sr,"예매");
 		fCardPane.add(signin,"Login");
 		fCardPane.add(signup,"SignUp");
 		fCardPane.add(theater,"극장");

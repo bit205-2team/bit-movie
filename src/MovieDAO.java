@@ -300,5 +300,30 @@ public class MovieDAO extends DBCON {
 	      }
 	   }
 	
+	public int seatCheck(String seat) {
+	      List<String> list = new ArrayList<String>();
+	      try {
+	         
+	         dbConn();
+	      
+	         String sql = "select seat_code from mticket where SCHEDULE_CODE = 10 and seat_code ="+"'"+seat+"'";
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         
+	         while(rs.next()) {
+	         list.add(rs.getString(1));
+	         }
+	         
+	         
+	      }catch(Exception e) {
+	         System.out.println("회원추가에러 발생");
+	         e.printStackTrace();
+	      }finally {
+	         dbClose();
+	      }
+	      
+	      return list.size();
+	   }
+	
 }
 

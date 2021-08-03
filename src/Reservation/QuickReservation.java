@@ -85,34 +85,14 @@ public class QuickReservation extends JPanel implements ActionListener{
 	ReservationDAO dao = new ReservationDAO();
 	
 	public QuickReservation() {
+		setLayout(new BorderLayout());
 		total.setLayout(new BorderLayout());
-		selectTime();
 		selectMovie();
 		selectDate();
+		selectTime();
 		fCardLayout();
 		
  	
-	}	
-	public void actionPerformed(ActionEvent ae) {
-		String event = ae.getActionCommand();
-	}
-	
-	public void actionTest() {
-
-			if(movieName != null && movieDate != null) {//영화제목이랑 날짜가 클릭됐을때 상영시간표를 출력한다.
-				
-				List<MovieVO> theaterList = dao.setMovieTheater(movieName,movieDate);
-				List<MovieVO> timeList = dao.setMovieTime(movieName,movieDate);
-				timetablePane.add(new MovieSchedule_theater_Time(theaterList,timeList));							 				
-				timePane.add(BorderLayout.CENTER,timetablePane);
-				updateUI();
-				theaterTimePane.timeBtn.addActionListener(new ActionListener()  {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						movieTime = e.getActionCommand();
-					}
-				});
-			}
 	}	
 	//WEST 영화선택 패널
 	public void selectMovie() {		
@@ -144,13 +124,13 @@ public class QuickReservation extends JPanel implements ActionListener{
 			movietitlePane = new MovieSchedule_Title(vo.getMname());
 			southPane.add(movietitlePane);
 			
-			  movietitlePane.titleBtn.addActionListener(new ActionListener() { //영화이름
-		            @Override
-		            public void actionPerformed(ActionEvent ae) {
-		               movieName = ae.getActionCommand();
-		               actionTest();
-		            }
-		      });  
+			movietitlePane.titleBtn.addActionListener(new ActionListener() { //영화이름
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					movieName = ae.getActionCommand();
+					actionTest();
+				}
+			});  
 		}
 		southPane.setPreferredSize(dim3);
 		movieScrollPane.setViewportView(southPane);
@@ -159,6 +139,27 @@ public class QuickReservation extends JPanel implements ActionListener{
 		//전체패널의 서쪽에 추가
 		total.add(BorderLayout.WEST,moviePane);		
 	}
+	public void actionPerformed(ActionEvent ae) {
+		String event = ae.getActionCommand();
+	}
+	
+	public void actionTest() { // 시간 판넬 버튼 액션?
+
+			if(movieName != null && movieDate != null) {//영화제목이랑 날짜가 클릭됐을때 상영시간표를 출력한다.
+				
+				List<MovieVO> theaterList = dao.setMovieTheater(movieName,movieDate);
+				List<MovieVO> timeList = dao.setMovieTime(movieName,movieDate);
+				timetablePane.add(new MovieSchedule_theater_Time(theaterList,timeList));							 				
+				timePane.add(BorderLayout.CENTER,timetablePane);
+				updateUI();
+				theaterTimePane.timeBtn.addActionListener(new ActionListener()  {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						movieTime = e.getActionCommand();
+					}
+				});
+			}
+	}	
 	public void selectDate() {
 		
 		//날짜 제목 north에 넣음
@@ -244,9 +245,9 @@ public class QuickReservation extends JPanel implements ActionListener{
 	
 	public void fCardLayout() {//viewPane 영역에 표기할 카트레이아웃
 		fCardPane = new JPanel(fCard);		
-		SeatReservation res = new SeatReservation(scheduleCode);		
+//		SeatReservation res = new SeatReservation(scheduleCode);		
 		fCardPane.add(total,"빠른예매");
-		fCardPane.add(res,"좌석선택");
+//		fCardPane.add(res,"좌석선택");
 		add(fCardPane);
 		
 	}	
