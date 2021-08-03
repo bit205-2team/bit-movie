@@ -48,8 +48,9 @@ public class SeatReservation extends JPanel {
    JComboBox peopleCombo = new JComboBox(people);
    
   
+   public SeatReservation(){}
    
-   public SeatReservation() {
+   public SeatReservation(String Scode) {
 
 //      setSize(1200,500);
 //      setVisible(true);
@@ -115,7 +116,7 @@ public class SeatReservation extends JPanel {
       TitledBorder Ticketing = new TitledBorder(new TitledBorder(new LineBorder(Color.black,4)));
       TicketingPanel.setBorder(Ticketing);
       TicketingPanel.setBounds(592,430,582,100);
-      ImageIcon img1 = new ImageIcon(".\\src\\img\\poster.jpg");
+      ImageIcon img1 = new ImageIcon("./img/cruella.jfif");
       
       Image img = img1.getImage();
       Image im2 = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);

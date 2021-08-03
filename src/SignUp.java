@@ -14,8 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
-import DBconnection.MovieDAO;
 import DBconnection.MovieVO;
 // 수정
 public class SignUp extends JPanel implements ActionListener{
@@ -23,7 +24,7 @@ public class SignUp extends JPanel implements ActionListener{
    String[] labelname = {"회원가입","ID","password","name","birth","tel","email"};
    String[] btnname = {"중복확인","회원가입"};
    int[] sum = {500,380,260,320,335,363,323}; // x죄표
-   int[] num = {50,100,150,200,250,300,350};  // y좌표
+   int[] num = {5,65,125,180,250,315,380};  // y좌표
    int j = 105;
    JTextField idtext,pawtext,nametext,birthtext,teltext,emailtext;
    
@@ -33,11 +34,11 @@ public class SignUp extends JPanel implements ActionListener{
     JLabel label[] = new JLabel[labelname.length];
 	
 //버튼 위치
-    
+    TitledBorder btn = new TitledBorder(new TitledBorder(new LineBorder(Color.gray,2)));
     for(int i = 0; i < btnname.length; i++) {
 	   btnid[i] = new JButton(btnname[i]);
-	      if(i==0) btnid[i].setBounds(710,110,100,20);
-	      if(i==1) btnid[i].setBounds(500,400,150,30);
+	      if(i==0) { btnid[i].setBounds(715,92,110,35); btnid[i].setBackground(Color.white); btnid[i].setBorder(btn);}
+	      if(i==1) { btnid[i].setBounds(450,465,230,50); btnid[i].setBackground(Color.pink); }
 	    add(btnid[i]);
 	    btnid[i].addActionListener(this);
    }
@@ -47,36 +48,43 @@ public class SignUp extends JPanel implements ActionListener{
 	   
          label[i] = new JLabel(labelname[i]);
          label[i].setFont(new Font("굴림",Font.BOLD,30));
-         label[i].setBounds(sum[i],num[i],150,40);         
+         label[i].setBounds(sum[i],num[i],150,90);         
          
          add(label[i]);
          
       }
    
  // 텍스트필드 위치		
-   
+   TitledBorder Loginpan = new TitledBorder(new TitledBorder(new LineBorder(Color.black,3)));
    idtext = new JTextField();
-   idtext.setBounds(430, 105, 270, 30);
+   idtext.setBackground(Color.white);
+   idtext.setBorder(Loginpan);
+   idtext.setBounds(430, 90, 270, 40);
    add(idtext);
-  
+
    pawtext = new JTextField();
-   pawtext.setBounds(430, 155, 270, 30);
+   pawtext.setBorder(Loginpan);
+   pawtext.setBounds(430, 150, 270, 40);
    add(pawtext);
    
    nametext = new JTextField();
-   nametext.setBounds(430, 205, 270, 30);
+   nametext.setBorder(Loginpan);
+   nametext.setBounds(430, 210, 270, 40);
    add(nametext);
    
    birthtext = new JTextField();
-   birthtext.setBounds(430, 255, 270, 30);
+   birthtext.setBorder(Loginpan);
+   birthtext.setBounds(430, 275, 270, 40);
    add(birthtext);
    
    teltext = new JTextField();
-   teltext.setBounds(430, 305, 270, 30);
+   teltext.setBorder(Loginpan);
+   teltext.setBounds(430, 340, 270, 40);
    add(teltext);
    
    emailtext = new JTextField();
-   emailtext.setBounds(430, 355, 270, 30);
+   emailtext.setBorder(Loginpan);
+   emailtext.setBounds(430, 405, 270, 40);
    add(emailtext);
    
    	 setBackground(Color.white);

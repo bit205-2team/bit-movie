@@ -1,4 +1,3 @@
-package DBconnection;
 
 
 import java.sql.Connection;

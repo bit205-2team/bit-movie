@@ -1,13 +1,19 @@
 package Reservation;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,23 +29,32 @@ import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class QuickReservation extends JPanel{
+import DBconnection.MovieVO;
+import DBconnection.ReservationDAO;
+
+public class QuickReservation extends JPanel implements ActionListener{
 	
 	Font menuFnt = new Font("굴림",Font.BOLD, 35);
 	Font sortFnt = new Font("굴림",Font.BOLD, 20);//정렬폰트
-
+	String movieName;
+	String movieDate;
+	String movieTime;
+	String scheduleCode;
+	JPanel fCardPane;
+	CardLayout fCard = new CardLayout();
 	
+	JPanel total = new JPanel();
+
 	//selectmovie
 	JPanel moviePane = new JPanel(new BorderLayout());	
 	JPanel titlePane = new JPanel();
 		JLabel movLbl;
 	JPanel ranksortPane = new JPanel(new FlowLayout(FlowLayout.LEFT));	
 		JComboBox<String> sortBox = new JComboBox<String>();
-	JScrollPane movieScrollPane =  new JScrollPane();		
-	String[] movieList = {"블랙위도우","크루엘라","미션임파서블"};
-	String[] theater = {"2D 1관 1층","2D 2관 1층","2D 4관 4층"}; 
-	String[] movietime = {"09:30","13:30","24:10"};
-	String[] seatStr = {"20석","3석","10석"};
+	JScrollPane movieScrollPane = new JScrollPane();		
+	MovieSchedule_Title movietitlePane;
+	MovieSchedule_theater_Time theaterTimePane;
+	//Object movieName;
 	
 	//selectdate
 	JPanel datePane = new JPanel(new BorderLayout());
@@ -57,7 +72,7 @@ public class QuickReservation extends JPanel{
 	JPanel timeTitlePane = new JPanel();//시간
 		JLabel timetitleLbl;
 	JPanel timetablePane = new JPanel(new GridLayout(0,1));	
-	JScrollPane timeScrollPane = new JScrollPane();	
+	JScrollPane timeScrollPane;	
 
 	JPanel reservationPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton reservationBtn = new JButton("좌석 선택");
@@ -66,20 +81,40 @@ public class QuickReservation extends JPanel{
 	Dimension dim1 = new Dimension(200,400);//날짜 전체패널 사이즈
 	Dimension dim2 = new Dimension(500,45);//각패널의 title패널 사이즈
 	Dimension dim3 = new Dimension(500,360);//각 패널의 SOUTH패널 사이즈
-	Dimension dim4 = new Dimension(500,350);
+	Dimension dim4 = new Dimension(600,350);
+	ReservationDAO dao = new ReservationDAO();
+	
 	public QuickReservation() {
-		setLayout(new BorderLayout());
-		
+		total.setLayout(new BorderLayout());
+		selectTime();
 		selectMovie();
 		selectDate();
-		selectTime();
+		fCardLayout();
 		
-//		setSize(1200,750);
-//		setVisible(true);
-//		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	
+ 	
+	}	
+	public void actionPerformed(ActionEvent ae) {
+		String event = ae.getActionCommand();
 	}
+	
+	public void actionTest() {
 
+			if(movieName != null && movieDate != null) {//영화제목이랑 날짜가 클릭됐을때 상영시간표를 출력한다.
+				
+				List<MovieVO> theaterList = dao.setMovieTheater(movieName,movieDate);
+				List<MovieVO> timeList = dao.setMovieTime(movieName,movieDate);
+				timetablePane.add(new MovieSchedule_theater_Time(theaterList,timeList));							 				
+				timePane.add(BorderLayout.CENTER,timetablePane);
+				updateUI();
+				theaterTimePane.timeBtn.addActionListener(new ActionListener()  {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						movieTime = e.getActionCommand();
+					}
+				});
+			}
+	}	
+	//WEST 영화선택 패널
 	public void selectMovie() {		
 		
 		moviePane.setPreferredSize(dim);
@@ -102,18 +137,28 @@ public class QuickReservation extends JPanel{
 		
 		//영화 리스트 moviePane.SOUTH에 추가
 		JPanel southPane = new JPanel(new GridLayout(0,1));
-		for(int i=0;i<movieList.length;i++) {
-			southPane.add(new MovieSchedule_Title(movieList[i]));
+		
+		List<MovieVO> movieList = dao.selectMovie();
+		for(int i=0;i<movieList.size();i++) {
+			MovieVO vo = movieList.get(i);
+			movietitlePane = new MovieSchedule_Title(vo.getMname());
+			southPane.add(movietitlePane);
+			
+			  movietitlePane.titleBtn.addActionListener(new ActionListener() { //영화이름
+		            @Override
+		            public void actionPerformed(ActionEvent ae) {
+		               movieName = ae.getActionCommand();
+		               actionTest();
+		            }
+		      });  
 		}
 		southPane.setPreferredSize(dim3);
 		movieScrollPane.setViewportView(southPane);
 		moviePane.add(BorderLayout.SOUTH,movieScrollPane);
 		
 		//전체패널의 서쪽에 추가
-		add(BorderLayout.WEST,moviePane);
-		
+		total.add(BorderLayout.WEST,moviePane);		
 	}
-	
 	public void selectDate() {
 		
 		//날짜 제목 north에 넣음
@@ -141,18 +186,22 @@ public class QuickReservation extends JPanel{
 			dateStr[i] = dateFormat.format(now.getTime());
 			dateBtn = new JButton(dateStr[i]);	
 			int dow = now.get(Calendar.DAY_OF_WEEK);
-			if(dow==1) {
-	    		dateBtn = new JButton(dateStr[i]);
-	    		dateBtn.setForeground(Color.RED);
-	    	}else if(dow==7){
-	    		dateBtn = new JButton(dateStr[i]);
-	    		dateBtn.setForeground(Color.BLUE);
-	    	}
+
 			
 			dateBtn.setFont(sortFnt);
 			dateListPane.add(dateBtn);
 			dateBtn.setBorderPainted(false);
 	    	dateBtn.setContentAreaFilled(false);
+	    	dateBtn.addActionListener(this);
+	    	
+	    	dateBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent ae) {		
+					movieDate = ae.getActionCommand().split(" ")[1];//03
+					actionTest();
+	             }
+	         });
+	    	
 		}
 		datePane.setBorder(new TitledBorder(new LineBorder(Color.gray)));
 		datePane.add(BorderLayout.SOUTH,dateListPane);
@@ -162,13 +211,9 @@ public class QuickReservation extends JPanel{
 		dateListPane.setPreferredSize(dim3);
 	     
 	    //datePane center에 담아줌
-		add(BorderLayout.CENTER,datePane);
+		total.add(BorderLayout.CENTER,datePane);
 	}
-	
-	 
-	
-	public void selectTime() {  
-		
+	public void selectTime() {  	
 		//title north에 추가
 		timetitleLbl = new JLabel("시간");
 		timetitleLbl.setFont(menuFnt);
@@ -176,25 +221,37 @@ public class QuickReservation extends JPanel{
 		timeTitlePane.setBorder(new TitledBorder(new LineBorder(Color.gray)));
 		timePane.add(BorderLayout.NORTH,timeTitlePane);		
 		
-		//center timebtn 추가
-		for(int i=0;i<theater.length;i++) {
-			timetablePane.add(new MovieSchedule_theater_Time(theater[i]));
-		}
-		timetablePane.setPreferredSize(dim4);
-		timeScrollPane.setViewportView(timetablePane);
-		timePane.add(BorderLayout.CENTER,timeScrollPane);
+		timePane.add(BorderLayout.CENTER,timetablePane);
 		//btn south 추가
 		reservationPane.add(reservationBtn);
+		reservationBtn.addActionListener(new ActionListener()  {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("좌석선택 버튼 ㅅ클릭");
+		         if(movieTime != null) {
+		        	 scheduleCode = dao.thrwoScheuleCode(movieName, movieDate, movieTime);
+		        	 System.out.println("좌석선택 버튼 ㅅ클릭 카드 가기전");
+		        	 fCard.show(fCardPane,"좌석선택");
+		         }
+			}
+		});
 		timePane.add(BorderLayout.SOUTH,reservationPane);
 	
-		timePane.setPreferredSize(dim);
 		timeTitlePane.setPreferredSize(dim2);
-		add(BorderLayout.EAST,timePane);
+		total.add(BorderLayout.EAST,timePane);
+		
 	}
 	
+	public void fCardLayout() {//viewPane 영역에 표기할 카트레이아웃
+		fCardPane = new JPanel(fCard);		
+		SeatReservation res = new SeatReservation(scheduleCode);		
+		fCardPane.add(total,"빠른예매");
+		fCardPane.add(res,"좌석선택");
+		add(fCardPane);
+		
+	}	
+	
 
-	
-	
 
 }
 	

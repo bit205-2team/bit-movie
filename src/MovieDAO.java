@@ -1,15 +1,134 @@
-package DBconnection;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import DBconnection.MovieVO;
 
 public class MovieDAO extends DBCON {
 	
 	
-//수정
 	public MovieDAO() {
 
 	}
+	
+	public void memberPaymentdate(){
+		try {
+			dbConn();
+			
+			String sql = "";
+			       
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+
+		}catch(Exception e) {
+			System.out.println("회원추가에러 발생");
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
+	}
+//예매내역 확인
+	
+	public List<String> reservation(String id){
+		List<String> list = new ArrayList<String>();
+		MovieVO vo = new MovieVO();
+		try {
+			
+			dbConn();
+//			id = "kimbabnara";	
+			String sql = "select t.ticket_code, t.id, t.tic_date, m.mname, s.set_mdate, s.theater, t.seat_code, t.man from mticket t join mschedule s on t.schedule_code=s.schedule_code join movie m on s.movie_code = m.movie_code and id="+ "'" + id + "'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(1));
+				list.add(rs.getString(3));
+				list.add(rs.getString(4));
+				list.add(rs.getString(5));
+				list.add(rs.getString(6));
+				list.add(rs.getString(7));
+				list.add(rs.getString(8));
+			
+			}
+		}catch(Exception e) {
+			System.out.println("회원추가에러 발생");
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
+		
+		return list;
+	}
+	//내가 본영화
+	public List<String> myMovie(String id){
+		List<String> list = new ArrayList<String>();
+		MovieVO vo = new MovieVO();
+		try {
+			
+			dbConn();
+	
+			String sql = "select t.ticket_code, t.id, t.tic_date, m.mname, s.set_mdate, s.theater, t.seat_code, t.man from mticket t join mschedule s on t.schedule_code=s.schedule_code join movie m on s.movie_code = m.movie_code and id="+ "'" + id + "'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(1));
+				list.add(rs.getString(3));
+				list.add(rs.getString(4));
+				list.add(rs.getString(5));
+				list.add(rs.getString(6));
+				list.add(rs.getString(7));
+				list.add(rs.getString(8));
+			
+			}
+		}catch(Exception e) {
+			System.out.println("회원추가에러 발생");
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
+		
+		return list;
+	}
+	
+	
+	
+//마이페이지 개인정보
+	public List<String> memberinformation(String id) {
+		List<String> list = new ArrayList<String>();
+		try {
+		
+			dbConn();
+		
+			//String id1 = "test01";
+			String sql = "select name, rank, point, pt_ticket from muser where id =" + "'" + id + "'";
+			             
+			//String sql = "select name, rank, point, pt_ticket from muser where id ='test01'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				list.add(rs.getString(1));
+				list.add(rs.getString(2));
+				list.add(rs.getString(3));
+				list.add(rs.getString(4));	
+			}
+		
+		}catch(Exception e) {
+			System.out.println("회원추가에러 발생");
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
+		return list;
+	}
+	
+	
 	
 	// 회원추가
 		public int insertRecord(MovieVO vo) {
@@ -84,7 +203,6 @@ public class MovieDAO extends DBCON {
 			while(rs.next()) {
 				MovieVO vo = new MovieVO();
 				list.add(vo);
-				
 			}
 		}catch(Exception e) {
 			System.out.println("전체회워선택 에러 발생");
@@ -164,5 +282,23 @@ public class MovieDAO extends DBCON {
 	      return logincheck;
 	      
 	   }
+	
+	public void deleteId(String id) {
+	      try {
+	         dbConn();
+	         
+	         String idcheck = "delete from muser where id ="+"'"+id+"'";
+	         String sql = idcheck;
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+
+	      }catch(Exception e) {
+	         
+	      }finally{
+	         dbClose();
+	      }
+	   }
+	
 }
 

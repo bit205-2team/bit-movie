@@ -20,8 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
-import DBconnection.MovieDAO;
 import DBconnection.MovieVO;
 
 public class MoviePage extends JPanel implements ActionListener{
@@ -55,14 +56,18 @@ public class MoviePage extends JPanel implements ActionListener{
 	
 	public void movieBase() {
 		setLayout(new BorderLayout());
+		 TitledBorder btn1 = new TitledBorder(new TitledBorder(new LineBorder(Color.black,1)));
+		 TitledBorder btn2 = new TitledBorder(new TitledBorder(new LineBorder(Color.black,1)));
 		topPane = new JPanel();
 		topPane.add(topBtn[0]);
 		topPane.add(topBtn[1]);
+		topBtn[0].setBorder(btn1);
+		topBtn[1].setBorder(btn2);
+		topPane.setBackground(Color.white);
 		movieBasePane.add(BorderLayout.NORTH, topPane);// 현재&예정작 버튼 세팅
-		
+
 		movieCard();
-		add(movieBasePane);
-		
+		add(movieBasePane);		
 	}
 	
 	public void movieCard() {
@@ -101,16 +106,22 @@ public class MoviePage extends JPanel implements ActionListener{
 		list = dao.moviePoster(selectNum);
 		
 		nowPane = new JPanel(new GridLayout(0, 4, 5, 50));
+		nowPane.setBackground(Color.white);
+		
 		nowMovieBtn = new JButton[list.size()]; // 수량 수정해야함
 		tickettingBtn = new JButton[list.size()];// 수량 수정해야함
 		
 		for(int i=0; i<list.size(); i++) {
 			MovieVO vo = list.get(i);
 			JPanel pane = new JPanel(new BorderLayout());
+			pane.setBackground(Color.white);
 				nowMovieBtn[i] = new JButton(imgConvertor(vo.getImg_addr(), 1));
 				nowMovieBtn[i].setBorderPainted(false);
 				nowMovieBtn[i].setContentAreaFilled(false);
+				TitledBorder setScreenpanLine = new TitledBorder(new TitledBorder(new LineBorder(Color.black,3)));
 				tickettingBtn[i] = new JButton("예매하기");
+				tickettingBtn[i].setBackground(Color.white);
+				tickettingBtn[i].setBorder(setScreenpanLine);
 				tickettingBtn[i].setPreferredSize(new Dimension(10,30));
 				JLabel lbl = new JLabel("예매순위 "+vo.getMvp()+"위 평점"+vo.getGrade()+"점", JLabel.CENTER);
 				int j=i;

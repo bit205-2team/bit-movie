@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import DBconnection.MovieDAO;
 
 //추가파일
 public class SignIn extends JPanel implements ActionListener{

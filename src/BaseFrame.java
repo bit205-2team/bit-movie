@@ -16,7 +16,6 @@ import javax.swing.JSplitPane;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import Reservation.MovieSchedule;
 import Reservation.QuickReservation;
 import Reservation.ReservationMovieYs;
 import Reservation.SeatReservation;
@@ -88,7 +87,7 @@ public class BaseFrame extends JFrame implements ActionListener{
 		JPanel menuPane = new JPanel();
 		JButton signIn = new JButton("Login");
 		signIn.addActionListener(this);
-		JButton signUp = new JButton("회원가입");
+		JButton signUp = new JButton("SignUp");
 		signUp.addActionListener(this);
 		signIn.setFont(new Font("굴림",Font.BOLD, 20));
 		signUp.setFont(new Font("굴림",Font.BOLD, 20));
@@ -145,9 +144,9 @@ public class BaseFrame extends JFrame implements ActionListener{
 		
 		JPanel titlePane = new JPanel();
 		JPanel menuPane = new JPanel();
-		JLabel signIn = new JLabel(BitCinemaMain.userid);
+		JLabel signIn = new JLabel("ID: "+BitCinemaMain.userid);
 
-		signIn.setFont(new Font("굴림",Font.BOLD, 20));
+		signIn.setFont(new Font("굴림",Font.BOLD,22));
 		signIn.setBackground(Color.orange);
 		titlePane.setLayout(new FlowLayout(FlowLayout.LEFT,0,15));
 		
@@ -155,7 +154,19 @@ public class BaseFrame extends JFrame implements ActionListener{
 		Box home = Box.createHorizontalBox();
 		Box home1 = Box.createVerticalBox();
 		
+		JButton logoutBtn = new JButton("Logout");
+	
+		
+		sign.add(Box.createHorizontalStrut(40));
 		sign.add(signIn);
+		sign.add(logoutBtn);
+		logoutBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new Logout();
+			}
+		});
 		home1.add(Box.createVerticalStrut(45));
 		home1.add(sign);
 
@@ -198,26 +209,26 @@ public class BaseFrame extends JFrame implements ActionListener{
 		
 		MyPage mp = new MyPage();
 		SignUp signup = new SignUp();
-		QuickReservation qq = new QuickReservation();
-		SeatReservation seat = new SeatReservation();
-		MovieSchedule Schedule = new MovieSchedule();
-		QuickReservation Quick = new QuickReservation();
 		ReservationMovieYs Ys = new ReservationMovieYs();
 		MoviePage movp = new MoviePage();
+		Theater theater = new Theater();
 		
 		fCardPane.add(movp,"영화");
 		fCardPane.add(mp,"마이페이지");
 		fCardPane.add(Ys,"예매");
 		fCardPane.add(signin,"Login");
-		fCardPane.add(signup,"회원가입");
+		fCardPane.add(signup,"SignUp");
+		fCardPane.add(theater,"극장");
 		
 		signin.btn.addActionListener(this);
 	}
-
+	public void frameDispose() {
+		this.dispose();
+	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Object event = ae.getActionCommand();
-		
+		MovieDAO dao = new MovieDAO();
 		JButton button = (JButton)ae.getSource();
 		String btn = button.getText();
 	
@@ -226,7 +237,7 @@ public class BaseFrame extends JFrame implements ActionListener{
 			System.out.println("클릭 영화"); 
 			
 		}else if(event.equals("예매")) {
-			if(BitCinemaMain.userid==null) {
+			if(BitCinemaMain.userid=="test01") {
 				JOptionPane.showMessageDialog(null,"로그인이 필요한 서비스 입니다.");
 			}else {
 			fCard.show(fCardPane, "예매");
@@ -234,10 +245,11 @@ public class BaseFrame extends JFrame implements ActionListener{
 			
 			}
 		}else if(event.equals("극장")) {
+			fCard.show(fCardPane,"극장");
 			System.out.println("클릭 영화");
 			
 		}else if(event.equals("마이페이지")) {
-			if(BitCinemaMain.userid==null) {
+			if(BitCinemaMain.userid=="test01") {
 				JOptionPane.showMessageDialog(null,"로그인이 필요한 서비스 입니다.");
 			}else {
 			fCard.show(fCardPane, "마이페이지");
@@ -247,12 +259,13 @@ public class BaseFrame extends JFrame implements ActionListener{
 			fCard.show(fCardPane,"Login");
 			System.out.println("클릭 로그인");
 
-		}else if(event.equals("회원가입")) {
-			fCard.show(fCardPane,"회원가입");
-			System.out.println("회원가입 클릭");
+		}else if(event.equals("SignUp")) {
+			fCard.show(fCardPane,"SignUp");
+			System.out.println("SignUp 클릭");
 		}else if(event.equals("로그인")) {
 			dispose();
 		}
 	}
+	
 
 }

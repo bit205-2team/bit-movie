@@ -3,13 +3,20 @@ package Reservation;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import DBconnection.MovieVO;
+
 
 public class MovieSchedule_theater_Time extends JPanel{
 	
@@ -24,42 +31,29 @@ public class MovieSchedule_theater_Time extends JPanel{
 		JButton timeBtn;
 		JLabel seat;
 
-	String[] movietime = {"09:30","13:30","24:10"};//10시이전 조조 /11시이후 심야
-	String[] seatStr = {"20석","3석","10석"};
-	
 	public MovieSchedule_theater_Time() {
 		
 	}
 	
-	public MovieSchedule_theater_Time(String theater) {
+	public MovieSchedule_theater_Time(List<MovieVO> theaterList,List<MovieVO> timeList) {
 
-		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		
-		theaterLbl = new JLabel(theater);
-		theaPane.add(theaterLbl);//상영관
-		
-		for(int i=0;i<movietime.length;i++) {
-			timeBtn = new JButton(movietime[i]);
-			timeseatPane.add(timeBtn);//상영시간
-			timeseatPane.add(new JLabel(seatStr[i]));//남은 좌석
-			timeBtn.setBackground(new Color(224, 224, 224));
-//			timeBtn.setBorderPainted(false);
-		}
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));		
+		try {	
+			theaterLbl = new JLabel(theaterList.get(0).getTheater());	
+			theaPane.add(theaterLbl);
+			Iterator<MovieVO> time = timeList.iterator();
+			while(time.hasNext()) {
+				   MovieVO one = time.next();
+				   timeBtn = new JButton(one.getStart_time());
+				   timeseatPane.add(timeBtn);
+			}
 		theaPane.setBackground(Color.WHITE);
 		timeseatPane.setBackground(Color.WHITE);
 		add(theaPane);
 		add(timeseatPane);
-			
-//		setSize(600,500);
-//		setVisible(true);
-//		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
+		updateUI();
+		}catch(Exception e) {
+			System.out.println("시간 판넬 오류!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
 	}
-
-
-//	public static void main(String[] args) {
-//		new MovieSchedule_theater_Time("2관 3층");
-//
-//	}
-
 }
